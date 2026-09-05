@@ -33,6 +33,15 @@ python3 -m http.server 8080 --directory dist
 
 Open `http://localhost:8080`.
 
+## Publish with GitHub Pages
+
+Upload the complete contents of this project to the root of your repository.
+In GitHub, open **Settings → Pages**, select **Deploy from a branch**, choose
+your main branch and the **/(root)** folder, then save. The root `index.html`
+automatically opens the application from `dist/`.
+
+Do not select the `docs/` folder, and do not upload only `README.md`.
+
 ## Architecture
 
 The MVP intentionally has no build step or runtime dependencies. The UI is in `dist/index.html`, presentation in `dist/styles.css`, and the deterministic browser analysis engine in `dist/app.js`.
