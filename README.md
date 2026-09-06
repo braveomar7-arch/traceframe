@@ -1,4 +1,4 @@
-# Traceframe 0.3 Practitioner Edition
+# Traceframe 0.5 Practitioner Edition
 
 **Every artifact. One timeline.**
 
@@ -36,6 +36,14 @@ Comments, queries, feedback and collaboration:
 - Printable practitioner report
 - Public capability and validation register
 - Email and WhatsApp query workspace
+- Live per-file forensic processing console
+- Named read, hash, extract, index and verification stages
+- Overall progress, elapsed time and estimated remaining time
+- Rotating evidence-handling guidance during processing
+- Safe cancellation after the current file
+- Bounded-memory streaming SHA-256 for files 256 MB and larger
+- Background hashing worker with true byte progress for forensic images
+- Automatic hash-only handling for oversized binary evidence
 
 ## Method alignment
 

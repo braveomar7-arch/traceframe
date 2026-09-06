@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Traceframe — open-source, local-first digital evidence triage.">
   <meta name="theme-color" content="#f3f0e8"><title>Traceframe — Every artifact. One timeline.</title>
-  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css"><link rel="stylesheet" href="academy.css"><link rel="stylesheet" href="references.css"><link rel="stylesheet" href="professional.css">
+  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css"><link rel="stylesheet" href="academy.css"><link rel="stylesheet" href="references.css"><link rel="stylesheet" href="professional.css"><link rel="stylesheet" href="progress.css">
 </head>
 <body>
 <header class="topbar">
@@ -157,6 +157,20 @@
   <a href="mailto:Braveomar7@gmail.com">Braveomar7@gmail.com</a>
 </footer>
 <div id="toast" role="status"></div>
+<section class="process-console" id="processConsole" aria-live="polite" aria-hidden="true">
+  <header><div class="process-brand"><span class="process-spinner"></span><div><small>FORENSIC PROCESSING</small><strong id="processStage">Preparing evidence</strong></div></div><button id="processMinimize" aria-label="Minimize processing console">—</button></header>
+  <div class="process-body">
+    <div class="process-file"><span id="processCounter">File 0 of 0</span><b id="processFile">Waiting…</b><small id="processSize">0 bytes</small></div>
+    <div class="overall-track"><i id="processBar"></i></div>
+    <div class="process-numbers"><strong id="processPercent">0%</strong><span id="processElapsed">00:00 elapsed</span><span id="processEta">Estimating…</span></div>
+    <div class="stage-rail">
+      <span data-stage="read">READ</span><span data-stage="hash">HASH</span><span data-stage="extract">EXTRACT</span><span data-stage="index">INDEX</span><span data-stage="verify">VERIFY</span>
+    </div>
+    <div class="process-log" id="processLog"></div>
+    <div class="process-tip"><b>GOOD PRACTICE</b><span id="processTip">Original evidence is never modified by Traceframe.</span></div>
+    <footer><span id="processSummary">You can continue reviewing the case.</span><button class="quiet" id="processCancel">Cancel after current file</button><button class="dark hidden" id="processDone">Done</button></footer>
+  </div>
+</section>
 <div class="tour-layer" id="tourLayer" aria-hidden="true"><div class="tour-card"><div class="tour-count" id="tourCount"></div><h2 id="tourTitle"></h2><p id="tourText"></p><div><button class="quiet" id="tourClose">Close</button><button class="dark" id="tourNext">Next →</button></div></div></div>
 <dialog id="vaultDialog"><form method="dialog" class="vault-form"><button class="dialog-close" value="cancel">×</button><p>ENCRYPTED LOCAL STORAGE</p><h2>Case vault</h2><span>Save the current case in this browser using AES-GCM encryption derived from your passphrase. Forgotten passphrases cannot be recovered.</span><label>Passphrase<input type="password" id="vaultPass" minlength="8" placeholder="At least 8 characters"></label><div class="vault-actions"><button type="button" class="quiet" id="listVault">Show saved cases</button><button type="button" class="quiet" id="restoreVault">Restore latest</button><button type="button" class="dark" id="saveVault">Encrypt & save</button></div><div id="vaultStatus"></div></form></dialog>
 <dialog id="entryDialog"><form method="dialog" class="entry-form"><button class="dialog-close" value="cancel">×</button><p id="entryEyebrow">NEW RECORD</p><h2 id="entryTitle">Add record</h2><label id="entryLabel">Details<textarea id="entryText"></textarea></label><label id="entryExtraLabel">Type<select id="entryExtra"><option>Observation</option><option>Inference</option><option>Limitation</option><option>Action required</option></select></label><div><button value="cancel" class="quiet">Cancel</button><button type="button" class="dark" id="commitEntry">Save record</button></div></form></dialog>
@@ -164,4 +178,7 @@
 <script src="academy.js"></script>
 <script src="professional.js"></script>
 <script src="enhancements.js"></script>
+<script src="large-files.js"></script>
+<script src="progress.js"></script>
+<script src="progress-reset.js"></script>
 </body></html>
