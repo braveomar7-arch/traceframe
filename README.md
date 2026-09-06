@@ -1,4 +1,4 @@
-# Traceframe
+# Traceframe 0.2
 
 **Every artifact. One timeline.**
 
@@ -20,6 +20,18 @@ Comments, feedback and collaboration are welcome on WhatsApp: [+220 700 0396](ht
 - UTC-normalized unified timeline
 - Email, phone, account and coordinate suggestions
 - Case JSON, manifest JSON and timeline CSV exports
+- Hash-only registration for any local file type
+- File-signature recognition and duplicate-hash detection
+- Chain-of-custody event ledger in exported manifests
+- Guided product walkthrough and operator handbook
+- Five-module evidence-handling course with knowledge checks
+
+## Method alignment
+
+Traceframe uses lifecycle language informed by ISO/IEC 27037, NIST SP 800-86,
+and published SWGDE collection guidance. It is not certified, endorsed, or a
+substitute for laboratory validation, legal advice, or jurisdiction-specific
+procedure.
 
 All processing happens in the browser. Traceframe does not upload evidence, fetch remote resources, recover deleted data or determine authenticity.
 

@@ -4,12 +4,12 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Traceframe — open-source, local-first digital evidence triage.">
   <meta name="theme-color" content="#f3f0e8"><title>Traceframe — Every artifact. One timeline.</title>
-  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css">
+  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css"><link rel="stylesheet" href="academy.css"><link rel="stylesheet" href="references.css">
 </head>
 <body>
 <header class="topbar">
   <a class="brand" href="#"><span class="logo"><i></i><i></i><i></i></span><span>traceframe<small>FORENSIC WORKBENCH</small></span></a>
-  <div class="top-actions"><span class="local"><i></i> DEVICE-LOCAL</span><button class="quiet" id="sampleBtn">Load demo case</button><button class="dark" id="exportTop">Export case</button></div>
+  <div class="top-actions"><span class="local"><i></i> DEVICE-LOCAL</span><button class="quiet" id="tourBtn">▶ Guided demo</button><button class="quiet" id="sampleBtn">Load demo case</button><button class="dark" id="exportTop">Export case</button></div>
 </header>
 <main>
   <aside>
@@ -21,6 +21,8 @@
       <button data-view="timeline"><span>⌁</span>Timeline <b id="navEvents">0</b></button>
       <button data-view="entities"><span>◎</span>Entities <b id="navEntities">0</b></button>
       <button data-view="integrity"><span>◇</span>Integrity</button>
+      <button data-view="guide"><span>?</span>User guide</button>
+      <button data-view="academy"><span>◈</span>Academy</button>
     </nav>
     <div class="aside-bottom"><button id="newCase">＋ New case</button><a href="https://opensource.org/license/mit" target="_blank">MIT · Open source ↗</a></div>
   </aside>
@@ -28,8 +30,8 @@
     <div class="view active" id="overview">
       <div class="page-head"><div><p>CASE OVERVIEW</p><h1>Turn scattered evidence<br>into a <em>single story.</em></h1></div><div class="status"><i></i><span>Analysis state</span><b id="analysisState">Ready for evidence</b></div></div>
       <div class="dropzone" id="dropzone">
-        <input id="fileInput" type="file" multiple accept=".json,.csv,.txt,.log,.eml,.xml,.gpx,.html,.htm">
-        <div class="drop-icon">＋</div><div><h2>Drop evidence here</h2><p>JSON · CSV · TXT · LOG · EML · XML · GPX · HTML</p></div><button class="dark">Choose files</button>
+        <input id="fileInput" type="file" multiple>
+        <div class="drop-icon">＋</div><div><h2>Drop evidence here</h2><p>ANY FILE FOR HASHING · STRUCTURED FORMATS FOR EXTRACTION</p></div><button class="dark">Choose files</button>
         <small>Files never leave this device</small>
       </div>
       <div class="metrics">
@@ -84,6 +86,34 @@
       <article class="manifest card"><div class="manifest-top"><span class="seal">✓</span><div><h3 id="manifestTitle">No evidence registered</h3><p>Each source is hashed independently using SHA-256 in your browser.</p></div></div><pre id="manifestPreview">Add evidence to create a verifiable manifest.</pre></article>
       <div class="limits"><h3>Method boundaries</h3><div><p><b>Observed</b>Original filename, byte size, MIME declaration and cryptographic digest.</p><p><b>Derived</b>Parsed events, UTC conversions and entity suggestions.</p><p><b>Not performed</b>Deleted-file recovery, disk imaging, network enrichment or authenticity determination.</p></div></div>
     </div>
+
+    <div class="view" id="guide">
+      <div class="subhead"><div><p>OPERATOR HANDBOOK</p><h2>From evidence to report</h2></div><button class="dark" id="guideTour">▶ Start guided demo</button></div>
+      <div class="guide-hero"><div><span>8 MINUTE QUICK START</span><h3>A defensible workflow, built into the tool.</h3><p>Follow the six-step process below. Traceframe preserves hashes and provenance, while you remain responsible for lawful authority, acquisition method and interpretation.</p></div><div class="guide-score"><strong>6</strong><span>operational steps</span></div></div>
+      <div class="guide-steps">
+        <article><b>01</b><div><h3>Obtain authority</h3><p>Confirm scope, legal authority, consent and organizational policy before collecting data.</p></div></article>
+        <article><b>02</b><div><h3>Document the source</h3><p>Record who collected it, when, where, device state, method and original identifiers.</p></div></article>
+        <article><b>03</b><div><h3>Preserve first</h3><p>Work from a verified copy when possible. Avoid changing the original and record every transfer.</p></div></article>
+        <article><b>04</b><div><h3>Add evidence</h3><p>Drop files into Traceframe. Every item is hashed; supported text structures are parsed locally.</p></div></article>
+        <article><b>05</b><div><h3>Review, do not assume</h3><p>Validate time zones, parser results and entity suggestions against original source evidence.</p></div></article>
+        <article><b>06</b><div><h3>Export and verify</h3><p>Export the case bundle and manifest. Preserve the application version and document limitations.</p></div></article>
+      </div>
+      <div class="help-grid"><article><h3>Supported now</h3><p>Hash any file; extract events from JSON, CSV, logs, email text, XML, GPX and HTML; detect emails, phone numbers and coordinates.</p></article><article><h3>Not an acquisition tool</h3><p>Traceframe does not image disks, bypass security, recover deleted files, or prove authenticity. Use validated acquisition tools first.</p></article><article><h3>Need help?</h3><p>Use the guided demo or contact the project on WhatsApp: <a href="https://wa.me/2207000396">+220 700 0396</a>.</p></article></div>
+    </div>
+
+    <div class="view" id="academy">
+      <div class="subhead"><div><p>TRACEFRAME ACADEMY</p><h2>Digital evidence handling essentials</h2></div><span class="course-progress"><b id="coursePercent">0%</b> complete</span></div>
+      <div class="course-layout">
+        <nav class="course-nav" id="courseNav"></nav>
+        <section class="lesson card" id="lesson"></section>
+      </div>
+      <section class="standards">
+        <div><p>METHOD ALIGNMENT</p><h3>Standards-aware, not certified</h3></div>
+        <p>Traceframe’s methodology is informed by the evidence lifecycle described by ISO/IEC 27037 and practical forensic guidance from NIST and SWGDE. References do not imply endorsement, certification or legal admissibility.</p>
+        <div class="standards-grid"><span>IDENTIFY</span><span>COLLECT</span><span>ACQUIRE</span><span>PRESERVE</span><span>EXAMINE</span><span>REPORT</span></div>
+        <div class="reference-links"><a href="https://www.iso.org/standard/44381.html" target="_blank" rel="noopener">ISO/IEC 27037 overview ↗</a><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener">NIST SP 800-86 ↗</a><a href="https://www.swgde.org/documents/published-complete-listing/" target="_blank" rel="noopener">SWGDE publications ↗</a></div>
+      </section>
+    </div>
   </section>
 </main>
 <footer class="site-footer">
@@ -92,5 +122,7 @@
   <a href="https://wa.me/2207000396" target="_blank" rel="noopener noreferrer">WhatsApp: +220 700 0396</a>
 </footer>
 <div id="toast" role="status"></div>
+<div class="tour-layer" id="tourLayer" aria-hidden="true"><div class="tour-card"><div class="tour-count" id="tourCount"></div><h2 id="tourTitle"></h2><p id="tourText"></p><div><button class="quiet" id="tourClose">Close</button><button class="dark" id="tourNext">Next →</button></div></div></div>
 <script src="app.js"></script>
+<script src="academy.js"></script>
 </body></html>
