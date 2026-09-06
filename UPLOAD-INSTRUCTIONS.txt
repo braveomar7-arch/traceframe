@@ -3,8 +3,9 @@ TRACEFRAME — GITHUB PAGES INSTALLATION
 1. Open your GitHub traceframe repository.
 2. Delete the old repository contents, or replace them with every file from
    this folder.
-3. Confirm index.html, app.js, academy.js, styles.css, contact.css,
-   academy.css, references.css, and favicon.svg are
+3. Confirm index.html, app.js, academy.js, professional.js, enhancements.js,
+   styles.css, contact.css, academy.css, references.css, professional.css,
+   and favicon.svg are
    visible at the repository root. They must NOT be inside another folder.
 4. Open Settings > Pages.
 5. Under Build and deployment select:
@@ -18,10 +19,13 @@ The repository root must look like:
 index.html
 app.js
 academy.js
+professional.js
+enhancements.js
 styles.css
 contact.css
 academy.css
 references.css
+professional.css
 favicon.svg
 README.md
 LICENSE

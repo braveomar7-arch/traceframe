@@ -4,12 +4,12 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Traceframe — open-source, local-first digital evidence triage.">
   <meta name="theme-color" content="#f3f0e8"><title>Traceframe — Every artifact. One timeline.</title>
-  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css"><link rel="stylesheet" href="academy.css"><link rel="stylesheet" href="references.css">
+  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css"><link rel="stylesheet" href="academy.css"><link rel="stylesheet" href="references.css"><link rel="stylesheet" href="professional.css">
 </head>
 <body>
 <header class="topbar">
   <a class="brand" href="#"><span class="logo"><i></i><i></i><i></i></span><span>traceframe<small>FORENSIC WORKBENCH</small></span></a>
-  <div class="top-actions"><span class="local"><i></i> DEVICE-LOCAL</span><button class="quiet" id="tourBtn">▶ Guided demo</button><button class="quiet" id="sampleBtn">Load demo case</button><button class="dark" id="exportTop">Export case</button></div>
+  <div class="top-actions"><span class="local"><i></i> DEVICE-LOCAL</span><button class="quiet" id="vaultBtn">▣ Case vault</button><button class="quiet" id="tourBtn">▶ Guided demo</button><button class="quiet" id="sampleBtn">Load demo</button><button class="dark" id="exportTop">Export case</button></div>
 </header>
 <main>
   <aside>
@@ -21,6 +21,9 @@
       <button data-view="timeline"><span>⌁</span>Timeline <b id="navEvents">0</b></button>
       <button data-view="entities"><span>◎</span>Entities <b id="navEntities">0</b></button>
       <button data-view="integrity"><span>◇</span>Integrity</button>
+      <button data-view="casefile"><span>▧</span>Case file</button>
+      <button data-view="queries"><span>⌕</span>Queries</button>
+      <button data-view="capabilities"><span>◫</span>Capabilities</button>
       <button data-view="guide"><span>?</span>User guide</button>
       <button data-view="academy"><span>◈</span>Academy</button>
     </nav>
@@ -55,10 +58,11 @@
         <div class="gambia-mark">GM</div>
         <div>
           <p>CREATED IN THE GAMBIA</p>
-          <h2>Built by a digital-forensics professional from The Gambia.</h2>
-          <span>Traceframe is an independent open-source project created to make transparent forensic triage more accessible.</span>
+          <h2>Developed by Sheikh Omar Jallow.</h2>
+          <span>Digital Forensic Expert · MSc Digital Forensic · Applied Artificial Intelligence</span>
+          <span class="creator-credentials">Tel: 833853607 · Email: <a href="mailto:Braveomar7@gmail.com">Braveomar7@gmail.com</a></span>
         </div>
-        <a class="whatsapp" href="https://wa.me/2207000396" target="_blank" rel="noopener noreferrer"><b>WhatsApp</b><span>Comments &amp; feedback</span><strong>+220 700 0396 →</strong></a>
+        <a class="whatsapp" href="https://wa.me/220833853607" target="_blank" rel="noopener noreferrer"><b>WhatsApp</b><span>Comments, queries &amp; feedback</span><strong>833853607 →</strong></a>
       </section>
     </div>
 
@@ -87,6 +91,37 @@
       <div class="limits"><h3>Method boundaries</h3><div><p><b>Observed</b>Original filename, byte size, MIME declaration and cryptographic digest.</p><p><b>Derived</b>Parsed events, UTC conversions and entity suggestions.</p><p><b>Not performed</b>Deleted-file recovery, disk imaging, network enrichment or authenticity determination.</p></div></div>
     </div>
 
+    <div class="view" id="casefile">
+      <div class="subhead"><div><p>CASE GOVERNANCE</p><h2>Authority, examiner & scope</h2></div><button class="dark" id="saveCaseMeta">Save case record</button></div>
+      <div class="case-form card">
+        <label>Case title<input id="metaTitle" placeholder="e.g. Unauthorized account access"></label>
+        <label>Case/reference number<input id="metaReference" placeholder="Organization or court reference"></label>
+        <label>Lead examiner<input id="metaExaminer" placeholder="Examiner's full name"></label>
+        <label>Organization<input id="metaOrganization" placeholder="Agency, laboratory or company"></label>
+        <label>Jurisdiction<input id="metaJurisdiction" placeholder="Country, state or applicable jurisdiction"></label>
+        <label>Authority basis<select id="metaAuthority"><option value="">Select authority</option><option>Owner consent</option><option>Organizational authorization</option><option>Court order / warrant</option><option>Incident response mandate</option><option>Other documented authority</option></select></label>
+        <label class="wide">Authorized scope<textarea id="metaScope" placeholder="Devices, accounts, dates, data types and permitted actions"></textarea></label>
+        <label class="wide">Case notes<textarea id="metaNotes" placeholder="Context, handling conditions and initial observations"></textarea></label>
+      </div>
+      <div class="custody card"><div class="card-head"><div><p>HANDLING LOG</p><h3>Chain-of-custody entries</h3></div><button class="quiet" id="addCustody">＋ Add entry</button></div><div id="custodyRows"></div></div>
+    </div>
+
+    <div class="view" id="queries">
+      <div class="subhead"><div><p>INVESTIGATIVE WORKSPACE</p><h2>Queries, findings & support</h2></div><button class="dark" id="addFinding">＋ New finding</button></div>
+      <div class="query-grid">
+        <section class="card"><div class="card-head"><div><p>CASE QUERY</p><h3>Search all derived evidence</h3></div></div><div class="query-box"><input id="globalQuery" placeholder="Email, phone, phrase, filename, event type…"><button class="dark" id="runQuery">Run query</button></div><div id="queryResults" class="query-results"><div class="table-empty">Enter a query to search the current case.</div></div></section>
+        <section class="card"><div class="card-head"><div><p>EXAMINER FINDINGS</p><h3>Document interpretations separately</h3></div></div><div id="findingList" class="finding-list"><div class="table-empty">No examiner findings recorded.</div></div></section>
+      </div>
+      <section class="support card"><div><p>PROJECT QUERIES</p><h3>Questions, comments or collaboration</h3><span>Contact the developer directly. Do not include confidential evidence, credentials or personal case data.</span></div><form id="supportForm"><input id="supportName" placeholder="Your name" required><input id="supportSubject" placeholder="Subject" required><textarea id="supportMessage" placeholder="Your question or feedback" required></textarea><div><button type="button" class="quiet" id="queryWhatsApp">Send via WhatsApp</button><button type="submit" class="dark">Send via email</button></div></form></section>
+    </div>
+
+    <div class="view" id="capabilities">
+      <div class="subhead"><div><p>CAPABILITY & VALIDATION REGISTER</p><h2>What Traceframe can—and cannot—do</h2></div><span class="status-key"><i></i> Functional <i></i> Experimental <i></i> Roadmap</span></div>
+      <div class="capability-summary"><article><strong>11</strong><span>functional capabilities</span></article><article><strong>4</strong><span>experimental parsers</span></article><article><strong>9</strong><span>roadmap modules</span></article><article><strong>0</strong><span>certification claims</span></article></div>
+      <div id="capabilityTable" class="table-wrap"></div>
+      <section class="validation-box"><h3>Professional validation pathway</h3><div><span>01 Known-answer fixtures</span><span>02 Parser regression tests</span><span>03 Cross-tool comparison</span><span>04 Independent review</span><span>05 Signed releases</span></div><p>Capability labels describe implementation state, not evidential reliability in every jurisdiction. Laboratories must validate tools for their intended use.</p></section>
+    </div>
+
     <div class="view" id="guide">
       <div class="subhead"><div><p>OPERATOR HANDBOOK</p><h2>From evidence to report</h2></div><button class="dark" id="guideTour">▶ Start guided demo</button></div>
       <div class="guide-hero"><div><span>8 MINUTE QUICK START</span><h3>A defensible workflow, built into the tool.</h3><p>Follow the six-step process below. Traceframe preserves hashes and provenance, while you remain responsible for lawful authority, acquisition method and interpretation.</p></div><div class="guide-score"><strong>6</strong><span>operational steps</span></div></div>
@@ -98,7 +133,7 @@
         <article><b>05</b><div><h3>Review, do not assume</h3><p>Validate time zones, parser results and entity suggestions against original source evidence.</p></div></article>
         <article><b>06</b><div><h3>Export and verify</h3><p>Export the case bundle and manifest. Preserve the application version and document limitations.</p></div></article>
       </div>
-      <div class="help-grid"><article><h3>Supported now</h3><p>Hash any file; extract events from JSON, CSV, logs, email text, XML, GPX and HTML; detect emails, phone numbers and coordinates.</p></article><article><h3>Not an acquisition tool</h3><p>Traceframe does not image disks, bypass security, recover deleted files, or prove authenticity. Use validated acquisition tools first.</p></article><article><h3>Need help?</h3><p>Use the guided demo or contact the project on WhatsApp: <a href="https://wa.me/2207000396">+220 700 0396</a>.</p></article></div>
+      <div class="help-grid"><article><h3>Supported now</h3><p>Hash any file; extract events from JSON, CSV, logs, email text, XML, GPX and HTML; detect emails, phone numbers and coordinates.</p></article><article><h3>Not an acquisition tool</h3><p>Traceframe does not image disks, bypass security, recover deleted files, or prove authenticity. Use validated acquisition tools first.</p></article><article><h3>Need help?</h3><p>Use the guided demo or contact Sheikh Omar Jallow: <a href="mailto:Braveomar7@gmail.com">Braveomar7@gmail.com</a>.</p></article></div>
     </div>
 
     <div class="view" id="academy">
@@ -118,11 +153,15 @@
 </main>
 <footer class="site-footer">
   <div><b>TRACEFRAME</b><span>Every artifact. One timeline.</span></div>
-  <p>Built by a digital-forensics professional from The Gambia.</p>
-  <a href="https://wa.me/2207000396" target="_blank" rel="noopener noreferrer">WhatsApp: +220 700 0396</a>
+  <p>Developed by Sheikh Omar Jallow · Digital Forensic Expert · MSc Digital Forensic · Applied Artificial Intelligence</p>
+  <a href="mailto:Braveomar7@gmail.com">Braveomar7@gmail.com</a>
 </footer>
 <div id="toast" role="status"></div>
 <div class="tour-layer" id="tourLayer" aria-hidden="true"><div class="tour-card"><div class="tour-count" id="tourCount"></div><h2 id="tourTitle"></h2><p id="tourText"></p><div><button class="quiet" id="tourClose">Close</button><button class="dark" id="tourNext">Next →</button></div></div></div>
+<dialog id="vaultDialog"><form method="dialog" class="vault-form"><button class="dialog-close" value="cancel">×</button><p>ENCRYPTED LOCAL STORAGE</p><h2>Case vault</h2><span>Save the current case in this browser using AES-GCM encryption derived from your passphrase. Forgotten passphrases cannot be recovered.</span><label>Passphrase<input type="password" id="vaultPass" minlength="8" placeholder="At least 8 characters"></label><div class="vault-actions"><button type="button" class="quiet" id="listVault">Show saved cases</button><button type="button" class="quiet" id="restoreVault">Restore latest</button><button type="button" class="dark" id="saveVault">Encrypt & save</button></div><div id="vaultStatus"></div></form></dialog>
+<dialog id="entryDialog"><form method="dialog" class="entry-form"><button class="dialog-close" value="cancel">×</button><p id="entryEyebrow">NEW RECORD</p><h2 id="entryTitle">Add record</h2><label id="entryLabel">Details<textarea id="entryText"></textarea></label><label id="entryExtraLabel">Type<select id="entryExtra"><option>Observation</option><option>Inference</option><option>Limitation</option><option>Action required</option></select></label><div><button value="cancel" class="quiet">Cancel</button><button type="button" class="dark" id="commitEntry">Save record</button></div></form></dialog>
 <script src="app.js"></script>
 <script src="academy.js"></script>
+<script src="professional.js"></script>
+<script src="enhancements.js"></script>
 </body></html>

@@ -1,14 +1,18 @@
-# Traceframe 0.2
+# Traceframe 0.3 Practitioner Edition
 
 **Every artifact. One timeline.**
 
 Traceframe is an open-source, local-first digital evidence triage workbench. It helps investigators hash heterogeneous evidence, extract timestamped records and entity suggestions, normalize time to UTC, search a unified timeline, and export a reproducible case bundle.
 
-Traceframe was built by a digital-forensics professional from The Gambia.
+Traceframe was developed by **Sheikh Omar Jallow**, Digital Forensic Expert,
+MSc Digital Forensic, Applied Artificial Intelligence.
 
 ## Contact
 
-Comments, feedback and collaboration are welcome on WhatsApp: [+220 700 0396](https://wa.me/2207000396).
+Comments, queries, feedback and collaboration:
+
+- Tel/WhatsApp: [833853607](https://wa.me/220833853607)
+- Email: [Braveomar7@gmail.com](mailto:Braveomar7@gmail.com)
 
 ## What the MVP supports
 
@@ -25,6 +29,13 @@ Comments, feedback and collaboration are welcome on WhatsApp: [+220 700 0396](ht
 - Chain-of-custody event ledger in exported manifests
 - Guided product walkthrough and operator handbook
 - Five-module evidence-handling course with knowledge checks
+- AES-GCM encrypted local case vault
+- Case authority, jurisdiction, examiner and scope record
+- Manual chain-of-custody entries
+- Global case queries and examiner findings
+- Printable practitioner report
+- Public capability and validation register
+- Email and WhatsApp query workspace
 
 ## Method alignment
 
