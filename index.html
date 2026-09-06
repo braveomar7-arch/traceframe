@@ -1,14 +1,96 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./dist/">
-  <title>Opening Traceframe…</title>
-  <link rel="canonical" href="./dist/">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Traceframe — open-source, local-first digital evidence triage.">
+  <meta name="theme-color" content="#f3f0e8"><title>Traceframe — Every artifact. One timeline.</title>
+  <link rel="icon" href="favicon.svg"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="contact.css">
 </head>
 <body>
-  <p>Opening <a href="./dist/">Traceframe</a>…</p>
-  <script>location.replace('./dist/' + location.search + location.hash);</script>
-</body>
-</html>
+<header class="topbar">
+  <a class="brand" href="#"><span class="logo"><i></i><i></i><i></i></span><span>traceframe<small>FORENSIC WORKBENCH</small></span></a>
+  <div class="top-actions"><span class="local"><i></i> DEVICE-LOCAL</span><button class="quiet" id="sampleBtn">Load demo case</button><button class="dark" id="exportTop">Export case</button></div>
+</header>
+<main>
+  <aside>
+    <div class="case-label">ACTIVE CASE</div>
+    <button class="case-name"><span>TF</span><div><b id="caseName">Untitled investigation</b><small id="caseId">TF-NEW</small></div></button>
+    <nav>
+      <button class="active" data-view="overview"><span>⌂</span>Overview</button>
+      <button data-view="evidence"><span>▤</span>Evidence <b id="navFiles">0</b></button>
+      <button data-view="timeline"><span>⌁</span>Timeline <b id="navEvents">0</b></button>
+      <button data-view="entities"><span>◎</span>Entities <b id="navEntities">0</b></button>
+      <button data-view="integrity"><span>◇</span>Integrity</button>
+    </nav>
+    <div class="aside-bottom"><button id="newCase">＋ New case</button><a href="https://opensource.org/license/mit" target="_blank">MIT · Open source ↗</a></div>
+  </aside>
+  <section class="workspace">
+    <div class="view active" id="overview">
+      <div class="page-head"><div><p>CASE OVERVIEW</p><h1>Turn scattered evidence<br>into a <em>single story.</em></h1></div><div class="status"><i></i><span>Analysis state</span><b id="analysisState">Ready for evidence</b></div></div>
+      <div class="dropzone" id="dropzone">
+        <input id="fileInput" type="file" multiple accept=".json,.csv,.txt,.log,.eml,.xml,.gpx,.html,.htm">
+        <div class="drop-icon">＋</div><div><h2>Drop evidence here</h2><p>JSON · CSV · TXT · LOG · EML · XML · GPX · HTML</p></div><button class="dark">Choose files</button>
+        <small>Files never leave this device</small>
+      </div>
+      <div class="metrics">
+        <article><span>01</span><p>EVIDENCE ITEMS</p><strong id="fileCount">0</strong><small id="fileSize">0 bytes preserved</small></article>
+        <article><span>02</span><p>TIMELINE EVENTS</p><strong id="eventCount">0</strong><small>normalized to UTC</small></article>
+        <article><span>03</span><p>IDENTITIES</p><strong id="entityCount">0</strong><small>suggested, not asserted</small></article>
+        <article><span>04</span><p>INTEGRITY</p><strong id="integrityScore">—</strong><small>SHA-256 manifest</small></article>
+      </div>
+      <div class="grid">
+        <article class="card span2">
+          <div class="card-head"><div><p>RECENT EXTRACTIONS</p><h3>Unified timeline</h3></div><button class="text-btn" data-jump="timeline">View all →</button></div>
+          <div id="miniTimeline" class="empty-state"><b>No events yet</b><span>Add evidence or load the demonstration case.</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><p>EVIDENCE HEALTH</p><h3>Case integrity</h3></div></div>
+          <div class="integrity-ring" id="integrityRing"><div><strong id="ringValue">0</strong><span>hashed</span></div></div>
+          <ul class="checks"><li><i class="green"></i>Original bytes preserved in memory</li><li><i class="green"></i>Deterministic SHA-256 manifest</li><li><i></i>No network enrichment enabled</li></ul>
+        </article>
+      </div>
+      <section class="creator">
+        <div class="gambia-mark">GM</div>
+        <div>
+          <p>CREATED IN THE GAMBIA</p>
+          <h2>Built by a digital-forensics professional from The Gambia.</h2>
+          <span>Traceframe is an independent open-source project created to make transparent forensic triage more accessible.</span>
+        </div>
+        <a class="whatsapp" href="https://wa.me/2207000396" target="_blank" rel="noopener noreferrer"><b>WhatsApp</b><span>Comments &amp; feedback</span><strong>+220 700 0396 →</strong></a>
+      </section>
+    </div>
+
+    <div class="view" id="evidence">
+      <div class="subhead"><div><p>EVIDENCE REGISTER</p><h2>Preserved sources</h2></div><button class="dark" onclick="document.querySelector('#fileInput').click()">＋ Add evidence</button></div>
+      <div class="toolbar"><input id="fileSearch" placeholder="Search filename, type or hash…"><span id="evidenceTotal">0 items</span></div>
+      <div class="table-wrap"><table><thead><tr><th>ITEM</th><th>TYPE</th><th>SIZE</th><th>SHA-256</th><th>EVENTS</th><th>STATE</th></tr></thead><tbody id="evidenceRows"></tbody></table><div class="table-empty" id="evidenceEmpty">No evidence has been added.</div></div>
+    </div>
+
+    <div class="view" id="timeline">
+      <div class="subhead"><div><p>NORMALIZED EVENTS</p><h2>Unified timeline</h2></div><button class="quiet" id="timelineExport">Export CSV</button></div>
+      <div class="toolbar timeline-tools"><input id="eventSearch" placeholder="Search message, actor, source or location…"><select id="eventType"><option value="">All event types</option></select><span id="timelineTotal">0 events</span></div>
+      <div class="time-caution">Times are normalized to UTC. Raw values and source attribution remain available in every event.</div>
+      <div id="timelineRows" class="timeline-list"><div class="table-empty">No timeline events extracted.</div></div>
+    </div>
+
+    <div class="view" id="entities">
+      <div class="subhead"><div><p>ENTITY SUGGESTIONS</p><h2>People, accounts & locations</h2></div></div>
+      <div class="entity-note">Automated extraction creates leads, not identity assertions. Confirm relationships against source evidence.</div>
+      <div id="entityGrid" class="entity-grid"><div class="table-empty">No entities extracted.</div></div>
+    </div>
+
+    <div class="view" id="integrity">
+      <div class="subhead"><div><p>CHAIN OF CUSTODY</p><h2>Reproducible case manifest</h2></div><button class="dark" id="downloadManifest">Download manifest</button></div>
+      <article class="manifest card"><div class="manifest-top"><span class="seal">✓</span><div><h3 id="manifestTitle">No evidence registered</h3><p>Each source is hashed independently using SHA-256 in your browser.</p></div></div><pre id="manifestPreview">Add evidence to create a verifiable manifest.</pre></article>
+      <div class="limits"><h3>Method boundaries</h3><div><p><b>Observed</b>Original filename, byte size, MIME declaration and cryptographic digest.</p><p><b>Derived</b>Parsed events, UTC conversions and entity suggestions.</p><p><b>Not performed</b>Deleted-file recovery, disk imaging, network enrichment or authenticity determination.</p></div></div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div><b>TRACEFRAME</b><span>Every artifact. One timeline.</span></div>
+  <p>Built by a digital-forensics professional from The Gambia.</p>
+  <a href="https://wa.me/2207000396" target="_blank" rel="noopener noreferrer">WhatsApp: +220 700 0396</a>
+</footer>
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
